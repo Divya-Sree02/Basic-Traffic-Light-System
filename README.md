@@ -19,67 +19,67 @@ This Arduino-based project simulates a traffic light system that operates normal
 # Circuit Diagram
 ![image](https://github.com/user-attachments/assets/7612d257-53c6-4993-b612-ebee396c0125)
 # code 
-const int redLedPin = 8;
-const int yellowLedPin = 9;
-const int greenLedPin = 10;
-const int buttonPin = 2;
+const int redLedPin = 8;<br>
+const int yellowLedPin = 9;<br>
+const int greenLedPin = 10;<br>
+const int buttonPin = 2;<br>
 
 
-const int greenLightDuration = 3000;  
-const int yellowLightDuration = 2000; 
-const int redLightDuration = 3000;    
+const int greenLightDuration = 3000; <br> 
+const int yellowLightDuration = 2000; <br>
+const int redLightDuration = 3000;  <br>  
 
-void setup() {
-  pinMode(redLedPin, OUTPUT);
-  pinMode(yellowLedPin, OUTPUT);
-  pinMode(greenLedPin, OUTPUT);
+void setup() {<br>
+  pinMode(redLedPin, OUTPUT);<br>
+  pinMode(yellowLedPin, OUTPUT);<br>
+  pinMode(greenLedPin, OUTPUT);<br>
 
-  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(buttonPin, INPUT_PULLUP);<br>
 }
-
-void loop() {
+<br>
+void loop() {<br>
  
-  if (digitalRead(buttonPin) == HIGH) {
-    handlePedestrianCrossing();
-  } else {
-    runTrafficLightCycle();
+  if (digitalRead(buttonPin) == HIGH) {<br>
+    handlePedestrianCrossing();<br>
+  } else {<br>
+    runTrafficLightCycle();<br>
+  }<br>
+}<br>
+<br>
+void runTrafficLightCycle() {<br>
+  // Green light<br>
+  digitalWrite(greenLedPin, HIGH);<br>
+  digitalWrite(yellowLedPin, LOW);<br>
+  digitalWrite(redLedPin, LOW);<br>
+  delay(greenLightDuration);<br>
+  if (digitalRead(buttonPin) == HIGH) {<br>
+    handlePedestrianCrossing();<br>
+  }<br>
+
+  // Yellow light<br>
+  digitalWrite(greenLedPin, LOW);<br>
+  digitalWrite(yellowLedPin, HIGH);<br>
+  digitalWrite(redLedPin, LOW);<br>
+  delay(yellowLightDuration);<br>
+  if (digitalRead(buttonPin) == HIGH) {<br>
+    handlePedestrianCrossing();<br>
   }
-}
 
-void runTrafficLightCycle() {
-  // Green light
-  digitalWrite(greenLedPin, HIGH);
-  digitalWrite(yellowLedPin, LOW);
-  digitalWrite(redLedPin, LOW);
-  delay(greenLightDuration);
-  if (digitalRead(buttonPin) == HIGH) {
-    handlePedestrianCrossing();
-  }
+  // Red light<br>
+  digitalWrite(greenLedPin, LOW);<br>
+  digitalWrite(yellowLedPin, LOW);<br>
+  digitalWrite(redLedPin, HIGH);<br>
+  delay(redLightDuration);<br>
+  if (digitalRead(buttonPin) == HIGH) {<br>
+    handlePedestrianCrossing();<br>
+  }<br>
+}<br>
 
-  // Yellow light
-  digitalWrite(greenLedPin, LOW);
-  digitalWrite(yellowLedPin, HIGH);
-  digitalWrite(redLedPin, LOW);
-  delay(yellowLightDuration);
-  if (digitalRead(buttonPin) == HIGH) {
-    handlePedestrianCrossing();
-  }
+void handlePedestrianCrossing() {<br>
+  // Immediately turn red light on<br>
+  digitalWrite(greenLedPin, LOW);<br>
+  digitalWrite(yellowLedPin, LOW);<br>
+  digitalWrite(redLedPin, HIGH);<br>
 
-  // Red light
-  digitalWrite(greenLedPin, LOW);
-  digitalWrite(yellowLedPin, LOW);
-  digitalWrite(redLedPin, HIGH);
-  delay(redLightDuration);
-  if (digitalRead(buttonPin) == HIGH) {
-    handlePedestrianCrossing();
-  }
-}
-
-void handlePedestrianCrossing() {
-  // Immediately turn red light on
-  digitalWrite(greenLedPin, LOW);
-  digitalWrite(yellowLedPin, LOW);
-  digitalWrite(redLedPin, HIGH);
-
-  delay(redLightDuration); 
-}
+  delay(redLightDuration); <br>
+}<br>
